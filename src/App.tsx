@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
-import { SxProps } from "@mui/material";
 import "./App.css";
 import Menu from './components/menu/menu';
 import Home from './views/home/component';
+import Login from './views/Login/component'
 import Header from './components/Header/component';
 import { Box } from "@mui/system";
 

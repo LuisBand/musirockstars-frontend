@@ -43,7 +43,7 @@ const Controllers = styled.div`
 `
 
 const Image = styled.img`
-    height: 100px;
+    height: 140px;
     border-radius: 50%;
 `
 
