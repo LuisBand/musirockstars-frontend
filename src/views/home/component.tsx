@@ -3,12 +3,14 @@ import styled from '@emotion/styled';
 import SongCard from '../../components/cards/song/component';
 import SongCardList from '../../components/cards/smallSongCard/component';
 import { Box} from "@mui/material";
+import Player from '../../components/player/player';
 
 const Container = styled.div`
     width:100%;
     position: relative;
     padding-left: 30px;
     box-sizing: border-box;
+    height: 42%; 
 `
 const Tittle = styled.h2`
     margin: 0;
@@ -38,12 +40,15 @@ const SongsContainer = styled.div`
 
 const VerticalScroll = styled.div`
     width: 90%; 
-    height: 42%; 
+    height: 42%;
     overflow-y:scroll;
 `
 
 const PlayerContainer = styled.div`
     width: 37%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px
 `
 
 const Home = () => {
@@ -130,6 +135,7 @@ const Home = () => {
                 </SongsContainer>
                 <PlayerContainer>
                     <Tittle>Playing now</Tittle>
+                    <Player image='https://m.media-amazon.com/images/I/61Uxg-SWExL._AC_SL1500_.jpg' artist='Daft Punk' duration={200} name='Give Life Back to Music'></Player>
                 </PlayerContainer> 
             </BottomContainer>
         </Container>
