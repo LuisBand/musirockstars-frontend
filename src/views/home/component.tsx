@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import SongCard from '../../components/cards/song/component';
 import SongCardList from '../../components/cards/smallSongCard/component';

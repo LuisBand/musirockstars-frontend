@@ -1,13 +1,11 @@
 import React from 'react';
-import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Menu from './components/menu/menu';
-import Home from './views/home/component';
-import Login from './views/Login/component'
 import Header from './components/Header/component';
-import { Box } from "@mui/system";
 
 import styled from '@emotion/styled';
+import { Outlet, Link } from "react-router-dom";
+
 
 const Container = styled.div`
   width: 100%;
@@ -24,9 +22,7 @@ const App: React.FC = () => {
       <Menu/>
       <Container>
         <Header/>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-        </Routes>
+        <Outlet/>
       </Container>
     </>
   );

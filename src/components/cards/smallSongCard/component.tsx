@@ -9,7 +9,7 @@ const container = {
     height: '50px',
     width: '98%',
     background: '#FFFFFF',
-    borderRadius: '5px',
+    borderRadius: '8px',
     boxShadow: '8.0px 16.0px 16.0px hsl(0deg 0% 0% / 0.25)',
     display: 'flex',
     justifyContent: 'space-between',

@@ -1,24 +1,28 @@
 import { render } from "react-dom";
+import { Routes, Route } from "react-router-dom";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from './App';
 import "./index.css";
 
+
+import Home from './views/home/component';
+import Login from "./views/Login/component";
+import LoginForm from "./components/forms/login/component";
+import RegisterForm from "./components/forms/register/component";
+
 ReactDOM.render(
   <BrowserRouter>
-    <App/>
+    <Routes>
+      <Route path="/" element={<App/>}>
+        <Route path="home" element={<Home/>}/>
+      </Route>
+      <Route path="/" element={<Login/>}> 
+        <Route path="login" element={<LoginForm/>}/>
+        <Route path="signup" element={<RegisterForm/>}/>
+      </Route>
+    </Routes>
   </BrowserRouter>,  
   document.getElementById('root')
 )
 
-// const rootElement = document.getElementById('root');
-// render(
-//   <BrowserRouter>
-//     <App/>
-//   </BrowserRouter>,  
-//   rootElement
-// );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
