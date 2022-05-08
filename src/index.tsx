@@ -14,12 +14,12 @@ import RegisterForm from "./components/forms/register/component";
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
+      <Route path="/" element={<Login/>}> 
+          <Route path="login" element={<LoginForm/>}/>
+          <Route path="signup" element={<RegisterForm/>}/>
+      </Route>
       <Route path="/" element={<App/>}>
         <Route path="home" element={<Home/>}/>
-      </Route>
-      <Route path="/" element={<Login/>}> 
-        <Route path="login" element={<LoginForm/>}/>
-        <Route path="signup" element={<RegisterForm/>}/>
       </Route>
     </Routes>
   </BrowserRouter>,  

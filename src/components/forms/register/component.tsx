@@ -11,8 +11,11 @@ import Button from '@mui/material/Button';
 import {Link } from "react-router-dom";  
 import {postUser} from "../../../services/users"
 import Modal from '@mui/material/Modal';
+import { sha512 } from "js-sha512";
 const axios = require('axios');
 const baseUrl = 'http://localhost:5522';
+// const saltRounds = 10;
+
 
 const formContaier = {
     width: '60%',
@@ -105,7 +108,7 @@ const RegisterForm = ( ) => {
         const data = {
             username: values.username,
             email: values.email,
-            password: values.password
+            password: sha512(values.password)
         };
 
         await axios.post(`${baseUrl}/users`, data ,{

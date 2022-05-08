@@ -16,6 +16,8 @@
     "@types/react-dom": "^18.0.3",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "js-sha512": "^0.8.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
@@ -46,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0"
   }
 }
