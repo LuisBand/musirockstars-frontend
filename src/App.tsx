@@ -30,6 +30,7 @@ const App: React.FC = () => {
       <Menu/>
       <Container>
         <Header/>
+        <p>{process.env.API_URL}</p>
         <Routes>
           <Route path="/" element= {<Login/>}>
             <Route path="login" element={<LoginForm/>}/>

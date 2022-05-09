@@ -8,14 +8,14 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 import {Link } from "react-router-dom";  
-import Login from '../../../services/login';
 import { sha512 } from "js-sha512";
 import Modal from '@mui/material/Modal';
 import Alert from '@mui/material/Alert';
 import { useNavigate } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { login } from "../../../redux/actions/auth/login";
-import { useSelector, useDispatch } from "react-redux";
+
+import { connect } from 'react-redux';
+import {loginUser} from '../../../redux/actions/userActions'
+import { useSelector } from 'react-redux';
 
 const formContaier = {
     width: '60%',
@@ -78,8 +78,7 @@ interface Response {
     description: string;
 }
 
-const LoginForm = ( ) => {
-    const dispatch = useDispatch();
+const LoginForm = (props: any) => {
 
     const navigate = useNavigate();
     const [values, setValues] = React.useState<State>({
@@ -87,6 +86,13 @@ const LoginForm = ( ) => {
         password: '',
         showPassword: false,
     });
+    const [errors, setErrors] = React.useState({});
+
+    React.useEffect(() => {
+        if (props.status.errors) {
+            setErrors(props.status.errors);
+        }
+    }, [props.status])
 
     const [open, setOpen] = React.useState(false);
 
@@ -106,39 +112,52 @@ const LoginForm = ( ) => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
         const data = {
             email: values.email,
             password: sha512(values.password)
         };
 
-        const response = await Login(data);
+        props.loginUser(data, props.history)
 
-        switch (response.status) {
-            case 200: {
-                console.log('Suess');
-                dispatch(login(response.data));
-                navigate('/home');
-                break;
-            }
+        console.log(props.history);
 
-            case 400: {
-                setResponseValues({
-                    status: 'error',
-                    description: 'Incorrect password, please try again'
-                })
-                setOpen(true)
-                break;
-            }
 
-            case 404: {
-                setResponseValues({
-                    status: 'error',
-                    description: 'The email address is incorrect'
-                })
-                setOpen(true)
-                break;
-            }
-        }
+        
+        // navigate('/home');
+
+
+        // const response = await Login(data);
+
+        // switch (response.status) {
+        //     case 200: {
+        //         console.log('Suess');
+        //         // const apiURL: string = process.env.API_URL
+        //         console.log(process.env.API_URL);
+
+        //         // dispatch(loginRequest());
+        //         navigate('/home');
+        //         break;
+        //     }
+
+        //     case 400: {
+        //         setResponseValues({
+        //             status: 'error',
+        //             description: 'Incorrect password, please try again'
+        //         })
+        //         setOpen(true)
+        //         break;
+        //     }
+
+        //     case 404: {
+        //         setResponseValues({
+        //             status: 'error',
+        //             description: 'The email address is incorrect'
+        //         })
+        //         setOpen(true)
+        //         break;
+        //     }
+        // }
     }
 
     const handleChange =
@@ -215,4 +234,13 @@ const LoginForm = ( ) => {
     )
 }
 
-export default LoginForm;
+const mapStateToProps = (state: any) => ({
+    user: state.user,
+    status: state.status,
+});
+   //this map actions to our props in this functional component
+const mapActionsToProps = {
+    loginUser
+};
+export default connect(mapStateToProps, mapActionsToProps)(LoginForm);
+

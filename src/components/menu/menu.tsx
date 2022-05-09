@@ -12,7 +12,6 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import { State } from '../../redux/reducers/rootReducers'
 
 const MenuDiv = styled.div`
     height: 100%;
@@ -68,7 +67,7 @@ const MenuList = styled.div`
 
 export const Menu = () => {
 
-    const user = useSelector((state: State) => state.auth)
+    const user = useSelector((state: any) => state.user)
     interface NavButton {
         text: string;
         icon: JSX.Element;
