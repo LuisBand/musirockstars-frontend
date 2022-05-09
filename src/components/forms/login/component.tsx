@@ -13,8 +13,9 @@ import { sha512 } from "js-sha512";
 import Modal from '@mui/material/Modal';
 import Alert from '@mui/material/Alert';
 import { useNavigate } from "react-router-dom";
-
-
+import { bindActionCreators } from "redux";
+import { login } from "../../../redux/actions/auth/login";
+import { useSelector, useDispatch } from "react-redux";
 
 const formContaier = {
     width: '60%',
@@ -78,6 +79,8 @@ interface Response {
 }
 
 const LoginForm = ( ) => {
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
     const [values, setValues] = React.useState<State>({
         email: '',
@@ -113,6 +116,7 @@ const LoginForm = ( ) => {
         switch (response.status) {
             case 200: {
                 console.log('Suess');
+                dispatch(login(response.data));
                 navigate('/home');
                 break;
             }

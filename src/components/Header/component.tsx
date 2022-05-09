@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import styled from '@emotion/styled';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import { useLocation } from 'react-router-dom'
 const Container = styled.div`
     width: 100%;
     height: 120px;
@@ -24,6 +25,10 @@ const style = {
 
 const Header: FC = () => {
     const [searchItem, setSearchItem] = useState("");
+    let location = useLocation();
+    if(location.pathname == "/login" || location.pathname == "/signup"){
+        return(null);
+    }
     return(
         <Container>
             <InputBase

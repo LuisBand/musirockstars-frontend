@@ -10,6 +10,9 @@ import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { State } from '../../redux/reducers/rootReducers'
 
 const MenuDiv = styled.div`
     height: 100%;
@@ -64,6 +67,8 @@ const MenuList = styled.div`
 
 
 export const Menu = () => {
+
+    const user = useSelector((state: State) => state.auth)
     interface NavButton {
         text: string;
         icon: JSX.Element;
@@ -93,13 +98,18 @@ export const Menu = () => {
         []
       );
 
+    let location = useLocation();
+    if(location.pathname == "/login" || location.pathname == "/signup"){
+        return(null);
+    }
+
     return (
         <MenuDiv>
             <UserInfo>
                 <ProfilePhoto src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2080&q=80" alt="" />
                 <Info>
-                    <Name>Luis Banderas</Name>
-                    <Email>lbanderasbarrera@gmail.com</Email>
+                    <Name>{user.username}</Name>
+                    <Email>{user.email}</Email>
                 </Info>
             </UserInfo>
 
@@ -115,6 +125,12 @@ export const Menu = () => {
             </MenuList>
         </MenuDiv>
     ); 
+}
+
+const mapStateToProps = (state: any) => {
+    return{
+        auth: state.auth
+    }
 }
 
 export default Menu;
