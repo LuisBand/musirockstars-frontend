@@ -1,23 +1,21 @@
 import { Box, Typography } from "@mui/material";
 import { FC } from "react";
-import { SongCardProps } from "./types";
+import { ArtistCardProps } from "./types";
 import styled from '@emotion/styled';
-import { ImageListItem } from '@mui/material';
 
-const SongCard: FC<SongCardProps> = ({ image,name, artist,}) => {
+const ArtistCard: FC<ArtistCardProps> = ({ image,name}) => {
 
   const container = {
     width: "200px",
+    textAlign: "center",
   }
 
   const tittle = {
+    marginTop: "14px",
     fontSize: "1.2rem",
     fontWeight: "bold",
     color: "black",
-    overflow: "hidden",
-    '&:hover':{
-      cursor: 'pointer'
-    }
+    overflow: "hidden"
   }
 
   const bottom = {
@@ -36,10 +34,7 @@ const SongCard: FC<SongCardProps> = ({ image,name, artist,}) => {
   const imageStyle = {
     width: "100%",
     height: "200px",
-    borderRadius: "10px",
-    '&:hover':{
-      cursor: 'pointer'
-    }
+    borderRadius: "50%",
   };
 
   const Container = styled.div`
@@ -52,25 +47,15 @@ const SongCard: FC<SongCardProps> = ({ image,name, artist,}) => {
     border-radius: 20px;
   `
 
-  const handleClick = () => {
-    
-  }
-
   return (
     <Container>
         <Box sx={container}>
-            <ImageListItem sx={imageStyle} onClick={handleClick}>
-              <img src={image} alt={`song-${name}`} />
-            </ImageListItem>
-
-            <Box sx={bottom}>
-                <Typography sx={tittle} onClick={handleClick}></Typography>
-                <Typography sx={info}>{artist}</Typography>
-            </Box>
+            <img style={imageStyle} src={image} alt={`song-${name}`} />
+            <Typography sx={tittle}>{name}</Typography>
         </Box>
     </Container>
     
   );
 };
 
-export default SongCard;
+export default ArtistCard;

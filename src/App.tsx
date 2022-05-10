@@ -13,6 +13,7 @@ import Login from "./views/Login/component";
 import LoginForm from "./components/forms/login/component";
 import RegisterForm from "./components/forms/register/component";
 import { Box } from '@mui/material';
+import Player from './components/player/player';
 
 
 const Container = styled.div`
@@ -23,23 +24,43 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
+const MainContainer = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 100px;
+`
+
+const ViewContainer = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-columns: 260px auto;
+  overflow: hidden;
+`
+
+const Principal = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-rows: 150px auto;
+`
 
 const App: React.FC = () => {
   return (
-    <>
-      <Menu/>
-      <Container>
-        <Header/>
-        <p>{process.env.API_URL}</p>
-        <Routes>
-          <Route path="/" element= {<Login/>}>
-            <Route path="login" element={<LoginForm/>}/>
-            <Route path="signup" element={<RegisterForm/>}/>
-          </Route>
-          <Route path="/home" element= {<Home/>}/>
+    <MainContainer>
+      <ViewContainer>
+        <Menu/>
+        <Principal>
+          <Header/>
+          <Routes>
+            <Route path="/" element= {<Login/>}>
+              <Route path="login" element={<LoginForm/>}/>
+              <Route path="signup" element={<RegisterForm/>}/>
+            </Route>
+            <Route path="/home" element= {<Home/>}/>
         </Routes>
-      </Container>
-    </>
+        </Principal>
+      </ViewContainer>
+      <Player image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg' artist="L'imperatrice" duration={200} name='Vodoo'/>
+    </MainContainer>
   );
 };
 export default App;

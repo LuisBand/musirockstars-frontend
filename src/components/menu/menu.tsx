@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 
 const MenuDiv = styled.div`
     height: 100%;
-    width: 300px;
+    width: 100%;
     background-color: #FFFFFF;
     display: block;
     padding-top: 35px;

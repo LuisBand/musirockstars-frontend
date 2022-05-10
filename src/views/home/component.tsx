@@ -1,15 +1,29 @@
 import styled from '@emotion/styled';
+import React, { useEffect } from 'react'
 import SongCard from '../../components/cards/song/component';
 import SongCardList from '../../components/cards/smallSongCard/component';
 import { Box} from "@mui/material";
 import Player from '../../components/player/player';
+import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import ArtistCard from '../../components/cards/artist/component';
 
+// const Container = styled.div`
+//     width:100%;
+//     height: 100%
+//     position: relative;
+//     padding-left: 30px;
+//     box-sizing: border-box;
+//     height: 42%; 
+// `
 const Container = styled.div`
-    width:100%;
+    width: 100%;
+    height: 100%
     position: relative;
     padding-left: 30px;
     box-sizing: border-box;
-    height: 42%; 
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 `
 const Tittle = styled.h2`
     margin: 0;
@@ -50,95 +64,103 @@ const PlayerContainer = styled.div`
     gap: 20px
 `
 
+interface _album {
+    id: number;
+    name: string;
+    image: string;
+    price_virtual: number;
+    proce_physical: number;
+    stock: number;
+    release: string;
+}
+interface State {
+    albums: _album[];
+}
+
 const Home = () => {
-    return (
+    // const albums = useSelector((state: any) => state.albums.albums)
+    // if(albums){
+    //     console.log(albums)
+    //     albums.map((album: _album) => {
+    //         console.log(album.id)
+    //     })
+    // }
+
+
+    const albums = useSelector((state: any) => state.albums.albums)
+
+    // const albumItemls = albums.map((album: _album) => {
+ 
+    // })
+
+    return (        
         <Container>
-            <Box sx={{width: '100%'}}>
-                <Tittle>Top Albums</Tittle>
+            <Box sx={{width: '100%', height: '100%'}}>
+               <Tittle>Top Albums</Tittle>
                 <AlbumsRoll>
-                    <SongCard 
-                        artist="L'imperatrice" 
-                        image="https://studiosol-a.akamaihd.net/uploadfile/letras/albuns/d/d/3/e/1065431618934436.jpg" 
-                        name="Vacances"
-                    />
-                    <SongCard 
-                        artist="L'imperatrice" 
-                        image="https://studiosol-a.akamaihd.net/uploadfile/letras/albuns/d/d/3/e/1065431618934436.jpg" 
-                        name="Vacances"
-                    />
-                    <SongCard 
-                        artist="L'imperatrice" 
-                        image="https://studiosol-a.akamaihd.net/uploadfile/letras/albuns/d/d/3/e/1065431618934436.jpg" 
-                        name="Vacances"
-                    />
-                    <SongCard 
-                        artist="L'imperatrice" 
-                        image="https://studiosol-a.akamaihd.net/uploadfile/letras/albuns/d/d/3/e/1065431618934436.jpg" 
-                        name="Vacances"
-                    />
-                    <SongCard 
-                        artist="L'imperatrice" 
-                        image="https://studiosol-a.akamaihd.net/uploadfile/letras/albuns/d/d/3/e/1065431618934436.jpg" 
-                        name="Vacances"
-                    />
-                    <SongCard 
-                        artist="L'imperatrice" 
-                        image="https://studiosol-a.akamaihd.net/uploadfile/letras/albuns/d/d/3/e/1065431618934436.jpg" 
-                        name="Vacances"
-                    />
-                    <SongCard 
-                        artist="L'imperatrice" 
-                        image="https://studiosol-a.akamaihd.net/uploadfile/letras/albuns/d/d/3/e/1065431618934436.jpg" 
-                        name="Vacances"
-                    />
-                    <SongCard 
-                        artist="L'imperatrice" 
-                        image="https://studiosol-a.akamaihd.net/uploadfile/letras/albuns/d/d/3/e/1065431618934436.jpg" 
-                        name="Vacances"
-                    />
-                    <SongCard 
-                        artist="L'imperatrice" 
-                        image="https://studiosol-a.akamaihd.net/uploadfile/letras/albuns/d/d/3/e/1065431618934436.jpg" 
-                        name="Vacances"
-                    />
-                    <SongCard 
-                        artist="L'imperatrice" 
-                        image="https://studiosol-a.akamaihd.net/uploadfile/letras/albuns/d/d/3/e/1065431618934436.jpg" 
-                        name="Vacances"
-                    />
+                    {albums?.map((album: _album) => (
+                        <SongCard 
+                            artist="L'imperatrice" 
+                            image={album.image}
+                            name={album.name}
+                            key={album.id}
+                        />
+                    ))}
+
                 </AlbumsRoll>
             </Box>
-            <BottomContainer>
-                <SongsContainer>
-                    <Tittle>Songs</Tittle>
-                    <VerticalScroll>
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                        <SongCardList artist='Parcels' name='Gamesofluck' duration='3:22' image='https://m.media-amazon.com/images/I/612ko+S+jhL._SS500_.jpg' />
-                    </VerticalScroll>
-                </SongsContainer>
-                <PlayerContainer>
-                    <Tittle>Playing now</Tittle>
-                    <Player image='https://m.media-amazon.com/images/I/61Uxg-SWExL._AC_SL1500_.jpg' artist='Daft Punk' duration={200} name='Give Life Back to Music'></Player>
-                </PlayerContainer> 
-            </BottomContainer>
+            <Box sx={{width: '100%', height: '100%'}}>
+               <Tittle>Top Artists</Tittle>
+                <AlbumsRoll>
+                    {/* {albums?.map((album: _album) => (
+                        <ArtistCard 
+                            image={album.image}
+                            name={album.name}
+                            key={album.id}
+                        />
+                    ))} */}
+
+                    <ArtistCard 
+                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
+                        name='Limperatrice'
+                    />
+                                        <ArtistCard 
+                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
+                        name='Limperatrice'
+                    />
+                                        <ArtistCard 
+                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
+                        name='Limperatrice'
+                    />
+                                        <ArtistCard 
+                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
+                        name='Limperatrice'
+                    />
+                                        <ArtistCard 
+                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
+                        name='Limperatrice'
+                    />
+                                        <ArtistCard 
+                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
+                        name='Limperatrice'
+                    />
+                                        <ArtistCard 
+                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
+                        name='Limperatrice'
+                    />
+
+
+                </AlbumsRoll>
+            </Box>
         </Container>
     )
 };
 
-export default Home;
+const mapStateToProps = (state: any) => ({
+    albums: state.albums,
+});
+
+const mapActionsToProps = {
+    
+};
+export default connect(mapStateToProps, mapActionsToProps)(Home);

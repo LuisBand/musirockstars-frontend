@@ -5,7 +5,7 @@ import InputBase from '@mui/material/InputBase';
 import { useLocation } from 'react-router-dom'
 const Container = styled.div`
     width: 100%;
-    height: 120px;
+    height: 100%;
     display: flex;
     align-items: center;
     padding-left: 30px;

@@ -15,7 +15,9 @@ import { useNavigate } from "react-router-dom";
 
 import { connect } from 'react-redux';
 import {loginUser} from '../../../redux/actions/userActions'
+import {setAlbums} from "../../../redux/actions/albumActions"
 import { useSelector } from 'react-redux';
+import { setTimeout } from "timers/promises";
 
 const formContaier = {
     width: '60%',
@@ -79,29 +81,23 @@ interface Response {
 }
 
 const LoginForm = (props: any) => {
-
+    const user = useSelector((state: any) => state.user)
     const navigate = useNavigate();
     const [values, setValues] = React.useState<State>({
         email: '',
         password: '',
         showPassword: false,
     });
-    const [errors, setErrors] = React.useState({});
-
-    React.useEffect(() => {
-        if (props.status.errors) {
-            setErrors(props.status.errors);
-        }
-    }, [props.status])
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleClose = () => setOpen(false);
 
     const [responseValue, setResponseValues] = React.useState<Response>({
         status: undefined,
         description: '',
     });
+
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = () => setOpen(false);
 
     const handleClickShowPassword = () => {
         setValues({
@@ -109,6 +105,7 @@ const LoginForm = (props: any) => {
           showPassword: !values.showPassword,
         });
     };
+
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -120,11 +117,9 @@ const LoginForm = (props: any) => {
 
         props.loginUser(data, props.history)
 
-        console.log(props.history);
+        props.setAlbums();
 
-
-        
-        // navigate('/home');
+        navigate('/home');
 
 
         // const response = await Login(data);
@@ -240,7 +235,8 @@ const mapStateToProps = (state: any) => ({
 });
    //this map actions to our props in this functional component
 const mapActionsToProps = {
-    loginUser
+    loginUser,
+    setAlbums
 };
 export default connect(mapStateToProps, mapActionsToProps)(LoginForm);
 

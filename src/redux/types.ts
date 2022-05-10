@@ -5,3 +5,6 @@ export const LOADING_USER='LOADING_USER';
 
 export const SET_ERRORS='SET_ERRORS';
 export const CLEAR_ERRORS='CLEAR_ERRORS';
+
+export const SET_ALBUMS='GET_ALBUMS';
+export const LOADING_ALBUMS='LOADING_ALBUMS';

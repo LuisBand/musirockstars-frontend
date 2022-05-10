@@ -1,6 +1,7 @@
 //imported reducers to combine
 import userReducer from './reducers/userReducer'
 import statusReducer from './reducers/statusReducer';
+import albumReducer from './reducers/albumReducers';
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
@@ -16,8 +17,10 @@ declare global {
 
 const reducer = combineReducers({
     user: userReducer,
-    status: statusReducer//user key ma store gareko
+    albums: albumReducer,
+    status: statusReducer
 });
+
 const store = createStore(reducer, initialState, compose(applyMiddleware(...middleware), (window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()) as any));
 export default store;
 
