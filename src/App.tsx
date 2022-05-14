@@ -14,6 +14,9 @@ import LoginForm from "./components/forms/login/component";
 import RegisterForm from "./components/forms/register/component";
 import { Box } from '@mui/material';
 import Player from './components/player/player';
+import AlbumDetails from './views/albumDetails/component';
+import Directions from './views/directions/component';
+import AddressForm from './components/forms/address/component';
 
 
 const Container = styled.div`
@@ -56,6 +59,9 @@ const App: React.FC = () => {
               <Route path="signup" element={<RegisterForm/>}/>
             </Route>
             <Route path="/home" element= {<Home/>}/>
+            <Route path="/albumDetails" element={<AlbumDetails/>}/>
+            <Route path="/directions" element={<Directions/>}/>
+            <Route path="/addDirection" element={<AddressForm/>}/>
         </Routes>
         </Principal>
       </ViewContainer>

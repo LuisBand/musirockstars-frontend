@@ -3,8 +3,9 @@ import { FC } from "react";
 import { SongCardProps } from "./types";
 import styled from '@emotion/styled';
 import { ImageListItem } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
-const SongCard: FC<SongCardProps> = ({ image,name, artist,}) => {
+const SongCard: FC<SongCardProps> = ({ image, name, artist, identifier }) => {
 
   const container = {
     width: "200px",
@@ -52,8 +53,12 @@ const SongCard: FC<SongCardProps> = ({ image,name, artist,}) => {
     border-radius: 20px;
   `
 
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    
+    if(identifier){
+      navigate(`/albumDetails`)
+    }
   }
 
   return (
@@ -64,7 +69,7 @@ const SongCard: FC<SongCardProps> = ({ image,name, artist,}) => {
             </ImageListItem>
 
             <Box sx={bottom}>
-                <Typography sx={tittle} onClick={handleClick}></Typography>
+                <Typography sx={tittle} onClick={handleClick}>{name}</Typography>
                 <Typography sx={info}>{artist}</Typography>
             </Box>
         </Box>

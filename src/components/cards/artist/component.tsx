@@ -3,7 +3,7 @@ import { FC } from "react";
 import { ArtistCardProps } from "./types";
 import styled from '@emotion/styled';
 
-const ArtistCard: FC<ArtistCardProps> = ({ image,name}) => {
+const ArtistCard: FC<ArtistCardProps> = ({image, name}) => {
 
   const container = {
     width: "200px",

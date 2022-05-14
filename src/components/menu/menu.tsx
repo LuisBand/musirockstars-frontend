@@ -74,24 +74,24 @@ export const Menu = () => {
         // onClick: () => void;
     }
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const Buttons: NavButton[] = useMemo(
         () => [
           {
             text: "Home",
             icon: <HomeOutlinedIcon/>,
-            // onClick: () => navigate("/"),
+            onClick: () => console.log('home'),
           },
           {
             text: "Album",
             icon: <LibraryMusicOutlinedIcon/>,
-            // onClick: () => navigate("/songs"),
+            onClick: () => navigate("/albums"),
           },
           {
             text: "Artist",
             icon: <PersonOutlineOutlinedIcon/>,
-            // onClick: () => navigate("/albums"),
+            onClick: () => navigate("/artists"),
           },
         ],
         []
@@ -113,14 +113,32 @@ export const Menu = () => {
             </UserInfo>
 
             <MenuList>
-                {Buttons.map((button, index)=>(
-                    <ListItem>
+                <ListItem onClick={()=>navigate('/home')}>
+                    <ListItemIcon>
+                        <HomeOutlinedIcon/>
+                    </ListItemIcon>  
+                    <ListItemText sx={{fontSize:14, fontWeight: 'bold'}} primary='Home'/>
+                </ListItem>
+                <ListItem onClick={()=>navigate('/albums')}>
+                    <ListItemIcon>
+                        <LibraryMusicOutlinedIcon/>,
+                    </ListItemIcon>  
+                    <ListItemText sx={{fontSize:14, fontWeight: 'bold'}} primary='Albums'/>
+                </ListItem>
+                <ListItem onClick={()=>navigate('/artists')}>
+                    <ListItemIcon>
+                        <PersonOutlineOutlinedIcon/>
+                    </ListItemIcon>  
+                    <ListItemText sx={{fontSize:14, fontWeight: 'bold'}} primary='Artists'/>
+                </ListItem>
+                {/* {Buttons.map((button, index)=>(
+                    <ListItem onClick={button}>
                         <ListItemIcon>
                             {button.icon}
                         </ListItemIcon>  
                         <ListItemText sx={{fontSize:14, fontWeight: 'bold'}} primary={button.text}/>
                     </ListItem>
-                ))} 
+                ))}  */}
             </MenuList>
         </MenuDiv>
     ); 

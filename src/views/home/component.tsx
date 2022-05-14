@@ -73,9 +73,6 @@ interface _album {
     stock: number;
     release: string;
 }
-interface State {
-    albums: _album[];
-}
 
 const Home = () => {
     // const albums = useSelector((state: any) => state.albums.albums)
@@ -103,7 +100,7 @@ const Home = () => {
                             artist="L'imperatrice" 
                             image={album.image}
                             name={album.name}
-                            key={album.id}
+                            identifier={album.id}
                         />
                     ))}
 
