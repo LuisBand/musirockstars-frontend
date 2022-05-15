@@ -1,11 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import { FC } from "react";
-import { SongCardProps } from "./types";
 import styled from '@emotion/styled';
 import { ImageListItem } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import { connect } from 'react-redux';
+import { setCurrentAlbum } from "../../../redux/actions/albumActions";
 
-const SongCard: FC<SongCardProps> = ({ image, name, artist, identifier }) => {
+const SongCard = (props: any) => {
 
   const container = {
     width: "200px",
@@ -56,8 +56,9 @@ const SongCard: FC<SongCardProps> = ({ image, name, artist, identifier }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if(identifier){
-      navigate(`/albumDetails`)
+    if(props.identifier){
+      props.setCurrentAlbum(props.identifier);
+      navigate(`/albumDetails`);
     }
   }
 
@@ -65,17 +66,22 @@ const SongCard: FC<SongCardProps> = ({ image, name, artist, identifier }) => {
     <Container>
         <Box sx={container}>
             <ImageListItem sx={imageStyle} onClick={handleClick}>
-              <img src={image} alt={`song-${name}`} />
+              <img src={props.image} alt={`song-${props.name}`} />
             </ImageListItem>
 
             <Box sx={bottom}>
-                <Typography sx={tittle} onClick={handleClick}>{name}</Typography>
-                <Typography sx={info}>{artist}</Typography>
+                <Typography sx={tittle} onClick={handleClick}>{props.name}</Typography>
             </Box>
         </Box>
     </Container>
     
   );
 };
-
-export default SongCard;
+const mapStateToProps = (state: any) => ({
+  user: state.user,
+  status: state.status,
+});
+const mapActionsToProps = {
+  setCurrentAlbum,
+};
+export default connect(mapStateToProps, mapActionsToProps)(SongCard);

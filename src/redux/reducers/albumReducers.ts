@@ -1,15 +1,4 @@
-import {SET_ALBUMS, LOADING_ALBUMS} from '../types'
-
-// type _album = {
-//     album: {
-//         name: string,
-//         image: string
-//     }
-// }
-
-// interface _albums {
-//     albums:_album
-// }
+import {SET_ALBUMS, LOADING_ALBUMS, SET_CURRENT_ALBUM} from '../types'
 
 const initialState = {
     loading: false,
@@ -18,8 +7,16 @@ const initialState = {
 export default function (state = initialState, action:any) {
     switch (action.type) {
         case SET_ALBUMS:
-            return {           
+            return {   
+                ...state,        
                 albums: action.payload,     
+                loading: false,
+            };
+
+        case SET_CURRENT_ALBUM:
+            return {      
+                ...state,     
+                currentAlbum: action.payload,     
                 loading: false,
             };
 

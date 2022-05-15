@@ -1,11 +1,9 @@
 import React,{FC} from 'react';
 import {Box, Typography} from '@mui/material'
-import {AlbumDetailsProps} from './types'
 import styled from '@emotion/styled';
 import { ImageListItem } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
-
 
 const MainContainer = styled.div`
     height: 100%;
@@ -61,12 +59,9 @@ const columns =  [
       width: 150,
     },
   ];
-
-
   
-const AlbumDetails: FC<AlbumDetailsProps> = () => {
+const ArtistDetails = () => {
     const currentAlbum = useSelector((state: any) => state.albums.currentAlbum)
-    console.log(currentAlbum.songs)
     return(
         <MainContainer>
             <Box sx={head}>
@@ -92,4 +87,4 @@ const AlbumDetails: FC<AlbumDetailsProps> = () => {
     )
 }
 
-export default AlbumDetails
+export default ArtistDetails

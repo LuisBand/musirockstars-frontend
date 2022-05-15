@@ -7,6 +7,7 @@ export const SET_ERRORS='SET_ERRORS';
 export const CLEAR_ERRORS='CLEAR_ERRORS';
 
 export const SET_ALBUMS='GET_ALBUMS';
+export const SET_CURRENT_ALBUM='SET_CURRENT_ALBUM';
 export const LOADING_ALBUMS='LOADING_ALBUMS';
 
 export const SET_ARTISTS='SET_ARTISTS';
