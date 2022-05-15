@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 import { ArtistCardProps } from "./types";
 import styled from '@emotion/styled';
+import { useNavigate } from "react-router-dom";
 
 const ArtistCard: FC<ArtistCardProps> = ({image, name, id}) => {
 
@@ -10,6 +11,9 @@ const ArtistCard: FC<ArtistCardProps> = ({image, name, id}) => {
     height: "200px",
     borderRadius: "50%",
     overflow: "hidden",
+    '&:hover':{
+      cursor: 'pointer'
+    }
   }
 
   const tittle = {
@@ -17,7 +21,10 @@ const ArtistCard: FC<ArtistCardProps> = ({image, name, id}) => {
     fontSize: "1.2rem",
     fontWeight: "bold",
     color: "black",
-    overflow: "hidden"
+    overflow: "hidden",
+    '&:hover':{
+      cursor: 'pointer'
+    }
   }
 
   const imageStyle = {
@@ -34,13 +41,21 @@ const ArtistCard: FC<ArtistCardProps> = ({image, name, id}) => {
     border-radius: 20px;
     text-align: center;
   `
+  const navigate = useNavigate();
+  const handleClick = () => {
+    // if(props.identifier){
+    //   props.setCurrentAlbum(props.identifier);
+    //   navigate(`/albumDetails`);
+    // }
+    navigate(`/artistDetails`);
+  }
 
   return (
     <Container>
-        <Box sx={container}>
+        <Box sx={container} onClick={handleClick}>
             <img style={imageStyle} src={image} alt={`song-${name}`} />
         </Box>
-        <Typography sx={tittle}>{name}</Typography>
+        <Typography sx={tittle} onClick={handleClick}>{name}</Typography>
     </Container>
     
   );

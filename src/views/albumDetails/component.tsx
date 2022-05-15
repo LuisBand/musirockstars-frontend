@@ -2,18 +2,21 @@ import React,{FC} from 'react';
 import {Box, Typography} from '@mui/material'
 import {AlbumDetailsProps} from './types'
 import styled from '@emotion/styled';
-import { ImageListItem } from '@mui/material';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid} from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
 
 
 const MainContainer = styled.div`
     height: 100%;
     width: 100%;
-    display: grid;
-    grid-template-rows: 200px auto;
     padding: 0 30px;
     box-sizing: border-box;
+`
+const Container = styled.div`
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 200px auto;
     gap: 24px;
 `
 
@@ -62,32 +65,32 @@ const columns =  [
     },
   ];
 
-
-  
 const AlbumDetails: FC<AlbumDetailsProps> = () => {
     const currentAlbum = useSelector((state: any) => state.albums.currentAlbum)
-    console.log(currentAlbum.songs)
     return(
         <MainContainer>
-            <Box sx={head}>
-                <Image src={currentAlbum.image}/> 
-                <Box sx={infoContainer}>
-                    <Typography sx={{fontSize: '12px', fontWeight:'bold'}}>ALBUM</Typography>
-                    <Typography sx={{fontSize: '44px', fontWeight:'bold'}}>{currentAlbum.name}</Typography>
-                    <Box sx={artistContainer}>
-                        <ArtistImage src={currentAlbum.artist.image} />
-                        <Typography>{currentAlbum.artist.name}</Typography>
-                        <Typography>{currentAlbum.release_year}</Typography>
-                    </Box>
-                </Box>
-            </Box>
-            <DataGrid
-                sx={{border: 'none', suppressPaginationPanel: 'true'}}
-                rows={currentAlbum.songs}
-                columns={columns}
-                hideFooterPagination
-            />
-
+                {currentAlbum && 
+                    <Container>
+                        <Box sx={head}>
+                            <Image src={currentAlbum.image}/> 
+                            <Box sx={infoContainer}>
+                                <Typography sx={{fontSize: '12px', fontWeight:'bold'}}>ALBUM</Typography>
+                                <Typography sx={{fontSize: '44px', fontWeight:'bold'}}>{currentAlbum.name}</Typography>
+                                <Box sx={artistContainer}>
+                                    <ArtistImage src={currentAlbum.artist.image} />
+                                    <Typography>{currentAlbum.artist.name}</Typography>
+                                    <Typography>{currentAlbum.release_year}</Typography>
+                                </Box>
+                            </Box>
+                        </Box>
+                        <DataGrid
+                            sx={{border: 'none', suppressPaginationPanel: 'true'}}
+                            rows={currentAlbum.songs}
+                            columns={columns}
+                            hideFooterPagination
+                        />
+                    </Container>
+                }
         </MainContainer>
     )
 }
