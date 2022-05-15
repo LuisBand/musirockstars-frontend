@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 
 import { connect } from 'react-redux';
 import {logoutUser} from '../../redux/actions/userActions'
+import { setAddresses } from "../../redux/actions/addressActions";
+
 
 const Container = styled.div`
     height: 100%;
@@ -66,6 +68,7 @@ const Header: FC = (props: any) => {
     const handleMyAddress = () => {
         navigate('/directions');
         setAnchorEl(null);
+        props.setAddresses(props.user.id);
     }
 
     const handleLogout = () => {
@@ -113,5 +116,6 @@ const mapStateToProps = (state: any) => ({
 });
 const mapActionsToProps = {
     logoutUser,
+    setAddresses
 };
 export default connect (mapStateToProps, mapActionsToProps)(Header);

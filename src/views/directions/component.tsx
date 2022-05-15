@@ -7,6 +7,9 @@ import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useNavigate } from 'react-router-dom';
+import { deleteAddress, setAddresses } from '../../redux/actions/addressActions';
+import { connect, useSelector } from 'react-redux';
+import { PropaneSharp } from '@mui/icons-material';
 
 
 const MainContainer = styled.div`
@@ -67,50 +70,20 @@ interface directioni {
     number: number,
     zip_code: number,
     phone_number: string,
-    is_default: boolean
+    is_default: boolean,
+    id: number
 
 }
 
-const Directions: FC = () => {
-    const directions = [
-        {
-            country: 'Mexico',
-            state: 'Morelos',
-            city: 'Tlayacapan',
-            street: 'Cuauhtemoc',
-            number: 18,
-            zip_code: 62540,
-            phone_number: '7351071718',
-            is_default: true,
-        },
-        {
-            country: 'Mexico',
-            state: 'Morelos',
-            city: 'Tlayacapan',
-            street: 'Cuauhtemoc',
-            number: 18,
-            zip_code: 62540,
-            phone_number: '7351071718',
-            is_default: false,
-        },
-        {
-            country: 'Mexico',
-            state: 'Morelos',
-            city: 'Tlayacapan',
-            street: 'Cuauhtemoc',
-            number: 18,
-            zip_code: 62540,
-            phone_number: '7351071718',
-            is_default: false,
-        }
-    ]
+const Directions: FC = (props: any) => {
+    const directions = useSelector((state: any) => state.addresses.userAddress)
 
     const navigate = useNavigate();
 
     const handleAdd = () => {
-        console.log('add');
         navigate('/addDirection');
     }
+
     return(
         <MainContainer>
             <Grid>
@@ -135,8 +108,18 @@ const Directions: FC = () => {
                             </Box>
                         </Box>
                         <ButtonGroup sx={{padding: '18px 25px', boxSizing: 'border-box'}} variant="text" aria-label="text button group">
-                            <Button>Edit</Button>
-                            <Button>Delete</Button>
+                            <Button onClick={()=> {
+                                    console.log('eddit');
+                                    navigate('/addDirection', {
+                                        state:{
+                                            id: direction.street
+                                        }
+                                    });
+                            }}>Edit</Button>
+                            <Button onClick={()=>{
+                                props.deleteAddress(direction.id, props.user.id);
+                                navigate('/directions')
+                            }}>Delete</Button>
                             {!direction.is_default && <Button >Set as default</Button>}
                         </ButtonGroup>
                     </Box>
@@ -146,5 +129,13 @@ const Directions: FC = () => {
         </MainContainer>
     )
 }
-
-export default Directions;
+const mapStateToProps = (state: any) => ({
+    user: state.user,
+    addresses: state.addresses,
+    status: state.status,
+});
+const mapActionsToProps = {
+    setAddresses,
+    deleteAddress,
+};
+export default connect (mapStateToProps, mapActionsToProps)(Directions);

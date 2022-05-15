@@ -77,7 +77,7 @@ const ArtistDetails = () => {
     // const currentAlbum = useSelector((state: any) => state.albums.currentAlbum)
     return(
         <MainContainer>
-            {/* <Box sx={head}> 
+            <Box sx={head}> 
                 <ArtistImage src='https://i.scdn.co/image/ab6761610000e5ebb6edcc3e5c79c2bb67a17d00'/> 
                 <Box sx={infoContainer}>
                     <Typography sx={{fontSize: '12px', fontWeight:'bold'}}>Artist</Typography>
@@ -118,7 +118,7 @@ const ArtistDetails = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </ScrollArea> */}
+            </ScrollArea>
                     
         </MainContainer>
     )

@@ -21,6 +21,7 @@ import { useSelector } from 'react-redux';
 import { setTimeout } from "timers/promises";
 
 
+
 const formContaier = {
     width: '60%',
     height: '100%',
@@ -240,7 +241,7 @@ const mapStateToProps = (state: any) => ({
 const mapActionsToProps = {
     loginUser,
     setAlbums,
-    setArtists
+    setArtists,
 };
 export default connect(mapStateToProps, mapActionsToProps)(LoginForm);
 

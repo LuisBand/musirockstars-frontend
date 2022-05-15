@@ -1,23 +1,14 @@
 import { Box, Typography} from "@mui/material";
 import React from "react";
 import styled from '@emotion/styled';
-import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
-import {Link } from "react-router-dom";  
-import { sha512 } from "js-sha512";
 import Modal from '@mui/material/Modal';
 import Alert from '@mui/material/Alert';
 import { useNavigate } from "react-router-dom";
-
 import { connect } from 'react-redux';
-import {loginUser} from '../../../redux/actions/userActions'
-import {setAlbums} from "../../../redux/actions/albumActions"
 import { useSelector } from 'react-redux';
-import { setTimeout } from "timers/promises";
+import { addAddress } from "../../../redux/actions/addressActions";
 
 const formContaier = {
     width: '100%',
@@ -78,6 +69,7 @@ interface State {
     number: number;
     zip_code: number;
     phone_number: string;
+    id: number
 }
   
 interface Response {
@@ -96,6 +88,7 @@ const AddressForm = (props: any) => {
         number: 0,
         zip_code: 0,
         phone_number: '',
+        id: 0
     });
 
     const [responseValue, setResponseValues] = React.useState<Response>({
@@ -108,32 +101,15 @@ const AddressForm = (props: any) => {
 
     const handleClose = () => setOpen(false);
 
-    const handleClickShowPassword = () => {
-        setValues({
-          ...values,
-        });
-    };
-
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const data = {
-            country: values.country,
-            state: values.state,
-            city: values.city,
-            street: values.street,
-            number: values.number,
-            zip_code: values.zip_code,
-            phone_number: values.phone_number,
+            ...values,
+            userId: user.id
         };
-
-        console.log(data);
-        // props.loginUser(data, props.history)
-
-        // props.setAlbums();
-
-        // navigate('/home');
+        props.addAddress(data)
     }
 
     const handleChange =
@@ -163,6 +139,7 @@ const AddressForm = (props: any) => {
                     <Label htmlFor="countryInput">
                         Country
                         <OutlinedInput
+                        required
                         sx={inputStyles}
                         id="countryInput"
                         type='text'
@@ -176,6 +153,7 @@ const AddressForm = (props: any) => {
                         <Label htmlFor="streetInput">
                             Street
                             <OutlinedInput
+                            required
                             sx={inputStyles}
                             id="streetInput"
                             type="text"
@@ -188,6 +166,7 @@ const AddressForm = (props: any) => {
                         <Label htmlFor="numberInput">
                             Number
                             <OutlinedInput
+                            required
                             sx={inputStyles}
                             id="numberInput"
                             type="number"
@@ -201,6 +180,7 @@ const AddressForm = (props: any) => {
                     <Label htmlFor="cityInput">
                         City
                         <OutlinedInput
+                        required
                         sx={inputStyles}
                         id="cityInput"
                         type="text"
@@ -213,6 +193,7 @@ const AddressForm = (props: any) => {
                     <Label htmlFor="stateInput">
                         State
                         <OutlinedInput
+                        required
                         sx={inputStyles}
                         id="stateInput"
                         type="text"
@@ -225,6 +206,7 @@ const AddressForm = (props: any) => {
                     <Label htmlFor="zipInput">
                         Zip Code
                         <OutlinedInput
+                        required
                         sx={inputStyles}
                         id="zipInput"
                         type="number"
@@ -237,6 +219,7 @@ const AddressForm = (props: any) => {
                     <Label htmlFor="phoneInput">
                         Phone Number
                         <OutlinedInput
+                        required
                         sx={inputStyles}
                         id="phoneInput"
                         type="string"
@@ -248,12 +231,6 @@ const AddressForm = (props: any) => {
 
                     <Button sx={buttonStyles} type='submit'>Add Address</Button>
                 </Form>
-                {/* <Typography sx={{color: 'gray', marginTop: '20px'}}>
-                    Don't have an account? 
-                    <span style={{marginLeft: '4px'}}>
-                        <Link to="/signup" style={{textDecoration: 'none', color: 'black'}}>Sign up for free</Link>
-                    </span>
-                </Typography> */}
         </Box>
     )
 }
@@ -264,8 +241,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapActionsToProps = {
-    loginUser,
-    setAlbums
+    addAddress,
 };
 export default connect(mapStateToProps, mapActionsToProps)(AddressForm);
 

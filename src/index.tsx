@@ -7,7 +7,7 @@ import {Provider} from 'react-redux';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 
-axios.defaults.baseURL = 'http://localhost:5522';
+axios.defaults.baseURL = 'http://3.218.67.164:9022';
 
 if(localStorage.getItem('token') != null) {
   const token = localStorage.getItem('token');
