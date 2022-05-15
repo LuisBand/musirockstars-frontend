@@ -65,7 +65,7 @@ const App: React.FC = () => {
         </Routes>
         </Principal>
       </ViewContainer>
-      <Player image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg' artist="L'imperatrice" duration={200} name='Vodoo'/>
+      <Player image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg' artist="L'imperatrice" duration={232} name='Vodoo'/>
     </MainContainer>
   );
 };

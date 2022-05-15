@@ -74,6 +74,15 @@ interface _album {
     release: string;
 }
 
+interface _artist {
+    id: number;
+    name: string;
+    image: string;
+    nationality: string;
+    description?: string;
+    topfive?: {};
+}
+
 const Home = () => {
     // const albums = useSelector((state: any) => state.albums.albums)
     // if(albums){
@@ -85,6 +94,7 @@ const Home = () => {
 
 
     const albums = useSelector((state: any) => state.albums.albums)
+    const artists = useSelector((state: any) => state.artists.artists)
 
     // const albumItemls = albums.map((album: _album) => {
  
@@ -109,44 +119,12 @@ const Home = () => {
             <Box sx={{width: '100%', height: '100%'}}>
                <Tittle>Top Artists</Tittle>
                 <AlbumsRoll>
-                    {/* {albums?.map((album: _album) => (
+                    {artists?.map((artist: _artist) => (
                         <ArtistCard 
-                            image={album.image}
-                            name={album.name}
-                            key={album.id}
+                            image={artist.image}
+                            name={artist.name}
                         />
-                    ))} */}
-
-                    <ArtistCard 
-                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
-                        name='Limperatrice'
-                    />
-                                        <ArtistCard 
-                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
-                        name='Limperatrice'
-                    />
-                                        <ArtistCard 
-                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
-                        name='Limperatrice'
-                    />
-                                        <ArtistCard 
-                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
-                        name='Limperatrice'
-                    />
-                                        <ArtistCard 
-                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
-                        name='Limperatrice'
-                    />
-                                        <ArtistCard 
-                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
-                        name='Limperatrice'
-                    />
-                                        <ArtistCard 
-                        image='https://indierocks.b-cdn.net/wp-content/uploads/2021/03/Limp%C3%A9ratrice_Tako-Tsubo_cover.jpg'
-                        name='Limperatrice'
-                    />
-
-
+                    ))}
                 </AlbumsRoll>
             </Box>
         </Container>

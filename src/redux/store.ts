@@ -2,6 +2,7 @@
 import userReducer from './reducers/userReducer'
 import statusReducer from './reducers/statusReducer';
 import albumReducer from './reducers/albumReducers';
+import artistReducer from './reducers/artistReducers';
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
@@ -18,6 +19,7 @@ declare global {
 const reducer = combineReducers({
     user: userReducer,
     albums: albumReducer,
+    artists: artistReducer,
     status: statusReducer
 });
 

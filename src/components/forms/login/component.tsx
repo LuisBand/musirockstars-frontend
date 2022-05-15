@@ -16,8 +16,10 @@ import { useNavigate } from "react-router-dom";
 import { connect } from 'react-redux';
 import {loginUser} from '../../../redux/actions/userActions'
 import {setAlbums} from "../../../redux/actions/albumActions"
+import { setArtists } from "../../../redux/actions/artistActions";
 import { useSelector } from 'react-redux';
 import { setTimeout } from "timers/promises";
+
 
 const formContaier = {
     width: '60%',
@@ -118,6 +120,7 @@ const LoginForm = (props: any) => {
         props.loginUser(data, props.history)
 
         props.setAlbums();
+        props.setArtists();
 
         navigate('/home');
 
@@ -236,7 +239,8 @@ const mapStateToProps = (state: any) => ({
    //this map actions to our props in this functional component
 const mapActionsToProps = {
     loginUser,
-    setAlbums
+    setAlbums,
+    setArtists
 };
 export default connect(mapStateToProps, mapActionsToProps)(LoginForm);
 

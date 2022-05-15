@@ -11,17 +11,6 @@ import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import PauseRounded from '@mui/icons-material/PauseRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 
-// const Container = styled.div`
-//     width: 550px;
-//     height: 42%;
-//     background-color: #FDFDFD;
-//     display: flex;
-//     flex-direction: column;
-//     gap: 16px;
-//     align-items: center;
-//     border-radius: 20px;
-//     place-content: center;
-// `
 const Container = styled.div`
     width: 100%;
     height: 100%;

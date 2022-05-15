@@ -3,11 +3,13 @@ import { FC } from "react";
 import { ArtistCardProps } from "./types";
 import styled from '@emotion/styled';
 
-const ArtistCard: FC<ArtistCardProps> = ({image, name}) => {
+const ArtistCard: FC<ArtistCardProps> = ({image, name, id}) => {
 
   const container = {
     width: "200px",
-    textAlign: "center",
+    height: "200px",
+    borderRadius: "50%",
+    overflow: "hidden",
   }
 
   const tittle = {
@@ -18,23 +20,8 @@ const ArtistCard: FC<ArtistCardProps> = ({image, name}) => {
     overflow: "hidden"
   }
 
-  const bottom = {
-    marginTop: "10px",
-    display: "flex",
-    flexDirection: "column",
-    height: "50px",
-  }
-
-  const info = {
-    fontSize: "0.8rem",
-    fontWeight: "600",
-    color: "gray",
-  }
-
   const imageStyle = {
-    width: "100%",
-    height: "200px",
-    borderRadius: "50%",
+    height: '100%'
   };
 
   const Container = styled.div`
@@ -45,14 +32,15 @@ const ArtistCard: FC<ArtistCardProps> = ({image, name}) => {
     background-size: cover;
     position:relative;
     border-radius: 20px;
+    text-align: center;
   `
 
   return (
     <Container>
         <Box sx={container}>
             <img style={imageStyle} src={image} alt={`song-${name}`} />
-            <Typography sx={tittle}>{name}</Typography>
         </Box>
+        <Typography sx={tittle}>{name}</Typography>
     </Container>
     
   );
