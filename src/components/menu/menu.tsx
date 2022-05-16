@@ -74,6 +74,12 @@ export const Menu = () => {
         // onClick: () => void;
     }
 
+    const itemStyle = {
+        '&:hover':{
+            cursor: 'pointer'
+        }
+    }
+
     const navigate = useNavigate();
 
     const Buttons: NavButton[] = useMemo(
@@ -113,19 +119,19 @@ export const Menu = () => {
             </UserInfo>
 
             <MenuList>
-                <ListItem onClick={()=>navigate('/home')}>
+                <ListItem sx={itemStyle} onClick={()=>navigate('/home')}>
                     <ListItemIcon>
                         <HomeOutlinedIcon/>
                     </ListItemIcon>  
                     <ListItemText sx={{fontSize:14, fontWeight: 'bold'}} primary='Home'/>
                 </ListItem>
-                <ListItem onClick={()=>navigate('/albums')}>
+                <ListItem sx={itemStyle} onClick={()=>navigate('/albums')}>
                     <ListItemIcon>
                         <LibraryMusicOutlinedIcon/>,
                     </ListItemIcon>  
                     <ListItemText sx={{fontSize:14, fontWeight: 'bold'}} primary='Albums'/>
                 </ListItem>
-                <ListItem onClick={()=>navigate('/artists')}>
+                <ListItem sx={itemStyle} onClick={()=>navigate('/artists')}>
                     <ListItemIcon>
                         <PersonOutlineOutlinedIcon/>
                     </ListItemIcon>  

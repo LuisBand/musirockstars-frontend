@@ -1,12 +1,5 @@
 import {Box, Typography} from '@mui/material'
 import styled from '@emotion/styled';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { useSelector } from 'react-redux';
 
 const MainContainer = styled.div`
@@ -18,11 +11,6 @@ const MainContainer = styled.div`
 `
 const Image = styled.img`
     height: 100%;
-`
-
-const ArtistImage = styled.img`
-    height: 100%;
-    border-radius: 50%;
 `
 
 const infoContainer = {
@@ -61,26 +49,7 @@ const container = {
     overflow: "hidden",
 }
 
-  const rows = [
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-    { id: 1, song: 'Gamesofluck', duration: 350 },
-  ];
-  
 const ArtistDetails = () => {
-    // const currentAlbum = useSelector((state: any) => state.albums.currentAlbum)
     const currentArtist = useSelector((state: any) => state.artists.currentArtist.artist)
     const albums = useSelector((state: any) => state.artists.currentArtist.albums)
     return(

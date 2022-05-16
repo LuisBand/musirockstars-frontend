@@ -108,10 +108,10 @@ const Player: FC<PlayerProps> = ({ image, name, artist, duration}) => {
         <Container>
 
             <Box sx={musicInfo}>
-                <Image src={image}/>
+                {/* <Image src={image}/> */}
                 <Box sx={{}}>
                     <Typography sx={{fontSize: '14px', fontWeight: 'bold', color: 'white'}}>{currentSong.name}</Typography>
-                    <Typography sx={{fontSize: '10px', color: 'white',}}>{artist}</Typography>
+                    {/* <Typography sx={{fontSize: '10px', color: 'white',}}>{artist}</Typography> */}
                 </Box>
             </Box>
 

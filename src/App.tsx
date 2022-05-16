@@ -18,6 +18,8 @@ import AlbumDetails from './views/albumDetails/component';
 import Directions from './views/directions/component';
 import AddressForm from './components/forms/address/component';
 import ArtistDetails from './views/artistDetails/component';
+import Albums from './views/albums/component';
+import Artists from './views/artists/component';
 
 
 const Container = styled.div`
@@ -68,6 +70,8 @@ const App: React.FC = () => {
             <Route path="/artistDetails" element={<ArtistDetails/>}/>
             <Route path="/directions" element={<Directions/>}/>
             <Route path="/addDirection" element={<AddressForm/>}/>
+            <Route path="/albums" element={<Albums/>}/>
+            <Route path="/artists" element={<Artists/>}/>
         </Routes>
         </Principal>
       </ViewContainer>
