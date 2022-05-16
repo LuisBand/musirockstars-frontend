@@ -3,8 +3,10 @@ import { FC } from "react";
 import { ArtistCardProps } from "./types";
 import styled from '@emotion/styled';
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { setCurrentArtist } from "../../../redux/actions/artistActions";
 
-const ArtistCard: FC<ArtistCardProps> = ({image, name, id}) => {
+const ArtistCard: FC<ArtistCardProps> = (props:any) => {
 
   const container = {
     width: "200px",
@@ -43,22 +45,29 @@ const ArtistCard: FC<ArtistCardProps> = ({image, name, id}) => {
   `
   const navigate = useNavigate();
   const handleClick = () => {
-    // if(props.identifier){
-    //   props.setCurrentAlbum(props.identifier);
-    //   navigate(`/albumDetails`);
-    // }
-    navigate(`/artistDetails`);
+    if(props.identifier){
+      console.log(props.identifier);
+      props.setCurrentArtist(props.identifier);
+      navigate(`/artistDetails`);
+      // navigate(`/albumDetails`);
+    }
   }
 
   return (
     <Container>
         <Box sx={container} onClick={handleClick}>
-            <img style={imageStyle} src={image} alt={`song-${name}`} />
+            <img style={imageStyle} src={props.image} alt={`song-${props.name}`} />
         </Box>
-        <Typography sx={tittle} onClick={handleClick}>{name}</Typography>
+        <Typography sx={tittle} onClick={handleClick}>{props.name}</Typography>
     </Container>
     
   );
 };
-
-export default ArtistCard;
+const mapStateToProps = (state: any) => ({
+  user: state.user,
+  status: state.status,
+});
+const mapActionsToProps = {
+  setCurrentArtist,
+};
+export default connect(mapStateToProps, mapActionsToProps)(ArtistCard);

@@ -1,21 +1,10 @@
 import styled from '@emotion/styled';
-import React, { useEffect } from 'react'
 import SongCard from '../../components/cards/song/component';
-import SongCardList from '../../components/cards/smallSongCard/component';
 import { Box} from "@mui/material";
-import Player from '../../components/player/player';
 import { connect } from 'react-redux';
 import { useSelector } from 'react-redux';
 import ArtistCard from '../../components/cards/artist/component';
 
-// const Container = styled.div`
-//     width:100%;
-//     height: 100%
-//     position: relative;
-//     padding-left: 30px;
-//     box-sizing: border-box;
-//     height: 42%; 
-// `
 const Container = styled.div`
     width: 100%;
     height: 100%
@@ -84,21 +73,10 @@ interface _artist {
 }
 
 const Home = () => {
-    // const albums = useSelector((state: any) => state.albums.albums)
-    // if(albums){
-    //     console.log(albums)
-    //     albums.map((album: _album) => {
-    //         console.log(album.id)
-    //     })
-    // }
-
 
     const albums = useSelector((state: any) => state.albums.albums)
     const artists = useSelector((state: any) => state.artists.artists)
 
-    // const albumItemls = albums.map((album: _album) => {
- 
-    // })
 
     return (        
         <Container>
@@ -123,6 +101,7 @@ const Home = () => {
                         <ArtistCard 
                             image={artist.image}
                             name={artist.name}
+                            identifier={artist.id}
                         />
                     ))}
                 </AlbumsRoll>
