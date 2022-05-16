@@ -1,6 +1,5 @@
 import { SET_ADDRESSES, ADD_ADDRESS, SET_DEFAULT_ADDRESS, DELETE_ADDRESS, LOADING_ADDRESS, SET_ERRORS, CLEAR_ERRORS } from '../types'
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
 
 

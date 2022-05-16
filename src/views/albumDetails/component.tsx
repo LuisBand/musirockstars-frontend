@@ -3,7 +3,16 @@ import {Box, Typography} from '@mui/material'
 import {AlbumDetailsProps} from './types'
 import styled from '@emotion/styled';
 import { DataGrid} from '@mui/x-data-grid';
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { setCurrentSong } from '../../redux/actions/songActions';
+import { PropaneSharp } from '@mui/icons-material';
 
 
 const MainContainer = styled.div`
@@ -47,26 +56,23 @@ const head = {
     gap: '16px',
 }
 
-const columns =  [
-    { 
-        field: 'id',
-        headerName: '#',
-        width: 90
-    },
-    {
-      field: 'name',
-      headerName: 'TITLE',
-      width: 380,
-    },
-    {
-      field: 'duration',
-      headerName: 'DURATION',
-      width: 150,
-    },
-  ];
+const ScrollArea = styled.div`
+    padding-top: 30px;
+    box-sizing: border-box;
+    height: 450px;
+    width: 100%;
+    overflow-y: scroll;
+`
 
-const AlbumDetails: FC<AlbumDetailsProps> = () => {
+const AlbumDetails: FC<AlbumDetailsProps> = (props:any) => {
     const currentAlbum = useSelector((state: any) => state.albums.currentAlbum)
+
+    function formatDuration(value: number) {
+        const minute = Math.floor(value / 60);
+        const secondLeft = value - minute * 60;
+        return `${minute}:${secondLeft < 9 ? `0${secondLeft}` : secondLeft}`;
+    }
+
     return(
         <MainContainer>
                 {currentAlbum && 
@@ -83,16 +89,44 @@ const AlbumDetails: FC<AlbumDetailsProps> = () => {
                                 </Box>
                             </Box>
                         </Box>
-                        <DataGrid
-                            sx={{border: 'none', suppressPaginationPanel: 'true'}}
-                            rows={currentAlbum.songs}
-                            columns={columns}
-                            hideFooterPagination
-                        />
+                        <ScrollArea>
+                            <TableContainer component={Paper} sx={{background: '#F8F8FA'}}>
+                                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>id</TableCell>
+                                            <TableCell align="right">Song</TableCell>
+                                            <TableCell align="right">duration</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                    {currentAlbum.songs?.map((row:any) => (
+                                        <TableRow
+                                        key={row.id}
+                                        onClick={() =>{props.setCurrentSong(row)}}
+                                        >
+                                            <TableCell component="th" scope="row">
+                                                {row.id}
+                                            </TableCell>
+                                            <TableCell align="right">{row.name}</TableCell>
+                                            <TableCell align="right">{formatDuration(row.duration)}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </ScrollArea>
                     </Container>
                 }
         </MainContainer>
     )
 }
-
-export default AlbumDetails
+const mapStateToProps = (state: any) => ({
+    user: state.user,
+    status: state.status,
+});
+   //this map actions to our props in this functional component
+const mapActionsToProps = {
+    setCurrentSong
+};
+export default connect(mapStateToProps, mapActionsToProps)(AlbumDetails);

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { PlayerProps } from "./types";
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
@@ -10,6 +10,9 @@ import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import PauseRounded from '@mui/icons-material/PauseRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
+import { useSelector } from "react-redux";
+import { createStore } from "redux";
+import { currentSongReducer } from "../../redux/reducers/songReducers";
 
 const Container = styled.div`
     width: 100%;
@@ -76,25 +79,41 @@ const TinyText = styled(Typography)({
 
 const Player: FC<PlayerProps> = ({ image, name, artist, duration}) => {
 
-    const theme = useTheme();
-    const time = 200;
-    const [position, setPosition] = useState(32);
-    const [paused, setPaused] = useState(false);
+    // const store = createStore(currentSongReducer)
+    // const unsuscribe = store.subscribe(()=>{
+    //     console.log('updated state');
+    // })
 
+    // unsuscribe()
+
+    const ref = useRef<HTMLAudioElement>(null);
+    const theme = useTheme();
+    const [position, setPosition] = useState(0);
+    const [paused, setPaused] = useState(true);
+    const currentSong = useSelector((state: any) => state.currentSong);
+    const url = currentSong.file;
     function formatDuration(value: number) {
         const minute = Math.floor(value / 60);
         const secondLeft = value - minute * 60;
         return `${minute}:${secondLeft < 9 ? `0${secondLeft}` : secondLeft}`;
     }
 
-    const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
+
+    const handlePlay = () => {
+        setPaused(!paused);
+        paused?
+        ref.current?.play():
+        ref.current?.pause();
+    }
+
+
     return(
         <Container>
 
             <Box sx={musicInfo}>
                 <Image src={image}/>
                 <Box sx={{}}>
-                    <Typography sx={{fontSize: '14px', fontWeight: 'bold', color: 'white'}}>{name}</Typography>
+                    <Typography sx={{fontSize: '14px', fontWeight: 'bold', color: 'white'}}>{currentSong.name}</Typography>
                     <Typography sx={{fontSize: '10px', color: 'white',}}>{artist}</Typography>
                 </Box>
             </Box>
@@ -103,17 +122,21 @@ const Player: FC<PlayerProps> = ({ image, name, artist, duration}) => {
                 <Box sx={contollersContainer}>
 
                         <Controllers>
+                                <audio
+                                    ref={ref}
+                                    src={url}
+                                />
                                 <IconButton aria-label="previous song">
                                     <FastRewindRounded sx={{fontSize: '30px'}} htmlColor='white' />
                                 </IconButton>
                                 <IconButton
+                                    
                                     aria-label={paused ? 'play' : 'pause'}
-                                    onClick={() => setPaused(!paused)}
                                 >
                                 {paused ? (
-                                    <PlayArrowRounded sx={{ fontSize: '40px' }} htmlColor='white'/>
+                                    <PlayArrowRounded onClick={handlePlay} sx={{ fontSize: '40px' }} htmlColor='white'/>
                                 ) : (
-                                    <PauseRounded sx={{ fontSize: '40px' }} htmlColor='white' />
+                                    <PauseRounded onClick={handlePlay} sx={{ fontSize: '40px' }} htmlColor='white' />
                                 )}
                                 </IconButton>
                                 <IconButton aria-label="next song">
@@ -125,10 +148,10 @@ const Player: FC<PlayerProps> = ({ image, name, artist, duration}) => {
                         <Slider
                             aria-label="time-indicator"
                             size="small"
-                            value={position}
+                            value={Math.round(ref.current?.currentTime!)}
                             min={0}
                             step={1}
-                            max={duration}
+                            max={ref.current?.duration}
                             onChange={(_, value) => setPosition(value as number)}
                             sx={{
                                 color: "white",
@@ -166,8 +189,8 @@ const Player: FC<PlayerProps> = ({ image, name, artist, duration}) => {
                             mt: -1,
                         }}
                         >
-                            <TinyText>{formatDuration(position)}</TinyText>
-                            <TinyText>-{formatDuration(duration - position)}</TinyText>
+                            <TinyText>{formatDuration(Math.round(ref.current?.currentTime!))}</TinyText>
+                            <TinyText>-{formatDuration(Math.round(ref.current?.duration!) - Math.round(ref.current?.currentTime!))}</TinyText>
                         </Box>
                 </Box>
             </Box>

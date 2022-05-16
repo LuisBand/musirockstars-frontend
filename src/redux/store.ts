@@ -4,6 +4,7 @@ import statusReducer from './reducers/statusReducer';
 import albumReducer from './reducers/albumReducers';
 import artistReducer from './reducers/artistReducers';
 import addressReducers from './reducers/addressReducers';
+import songReducers from './reducers/songReducers';
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
@@ -22,7 +23,8 @@ const reducer = combineReducers({
     albums: albumReducer,
     artists: artistReducer,
     status: statusReducer,
-    addresses: addressReducers
+    addresses: addressReducers,
+    currentSong: songReducers
 });
 
 const store = createStore(reducer, initialState, compose(applyMiddleware(...middleware), (window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()) as any));

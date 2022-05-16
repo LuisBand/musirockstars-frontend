@@ -107,6 +107,7 @@ const ArtistDetails = () => {
                         {rows.map((row) => (
                             <TableRow
                             key={row.id}
+                            onClick={() =>{console.log(row.id)}}
                             >
                                 <TableCell component="th" scope="row">
                                     {row.id}
