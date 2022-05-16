@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { Outlet } from "react-router-dom";
 
 import { render } from "react-dom";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 
 import Home from './views/home/component';
 import Login from "./views/Login/component";
@@ -55,6 +55,10 @@ const App: React.FC = () => {
         <Principal>
           <Header/>
           <Routes>
+            <Route
+              path="/"
+              element={<Navigate to="/login" replace/>}
+            />
             <Route path="/" element= {<Login/>}>
               <Route path="login" element={<LoginForm/>}/>
               <Route path="signup" element={<RegisterForm/>}/>
