@@ -18,7 +18,6 @@ export const setAlbums = () => async (dispatch: any) => {
 }
 
 export const setCurrentAlbum = (albumId: any) => async (dispatch: any) => {
-    console.log('holis');
     dispatch({ type: LOADING_ALBUMS });
     await axios.get(`/album/${albumId}`)
     .then((res) => {

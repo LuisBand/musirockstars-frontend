@@ -2,7 +2,6 @@ import React,{FC} from 'react';
 import {Box, Typography} from '@mui/material'
 import {AlbumDetailsProps} from './types'
 import styled from '@emotion/styled';
-import { DataGrid} from '@mui/x-data-grid';
 import { connect, useSelector } from 'react-redux';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,7 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { setCurrentSong } from '../../redux/actions/songActions';
-import { PropaneSharp } from '@mui/icons-material';
+import Button from '@mui/material/Button';
 
 
 const MainContainer = styled.div`
@@ -88,6 +87,10 @@ const AlbumDetails: FC<AlbumDetailsProps> = (props:any) => {
                                     <Typography>{currentAlbum.release_year}</Typography>
                                 </Box>
                             </Box>
+                            <Box sx={{marginLeft:'40px', display:'flex', gap:'10px'}}>
+                                <Button variant="contained">Buy Physical</Button>
+                                <Button variant="contained">Buy Digital</Button>
+                            </Box>
                         </Box>
                         <ScrollArea>
                             <TableContainer component={Paper} sx={{background: '#F8F8FA'}}>
@@ -97,6 +100,7 @@ const AlbumDetails: FC<AlbumDetailsProps> = (props:any) => {
                                             <TableCell>id</TableCell>
                                             <TableCell align="right">Song</TableCell>
                                             <TableCell align="right">duration</TableCell>
+                                            <TableCell align="right"></TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -110,6 +114,9 @@ const AlbumDetails: FC<AlbumDetailsProps> = (props:any) => {
                                             </TableCell>
                                             <TableCell align="right">{row.name}</TableCell>
                                             <TableCell align="right">{formatDuration(row.duration)}</TableCell>
+                                            <TableCell align="right">
+                                                <Button variant="contained">Buy</Button>
+                                            </TableCell>
                                         </TableRow>
                                     ))}
                                     </TableBody>

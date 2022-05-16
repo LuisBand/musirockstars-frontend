@@ -79,16 +79,10 @@ const TinyText = styled(Typography)({
 
 const Player: FC<PlayerProps> = ({ image, name, artist, duration}) => {
 
-    // const store = createStore(currentSongReducer)
-    // const unsuscribe = store.subscribe(()=>{
-    //     console.log('updated state');
-    // })
-
-    // unsuscribe()
-
     const ref = useRef<HTMLAudioElement>(null);
     const theme = useTheme();
     const [position, setPosition] = useState(0);
+    const [onChange, setOnChange] = useState(false);
     const [paused, setPaused] = useState(true);
     const currentSong = useSelector((state: any) => state.currentSong);
     const url = currentSong.file;
@@ -98,6 +92,9 @@ const Player: FC<PlayerProps> = ({ image, name, artist, duration}) => {
         return `${minute}:${secondLeft < 9 ? `0${secondLeft}` : secondLeft}`;
     }
 
+    setInterval(function(){ 
+        setPosition(Math.round(ref.current?.currentTime!));        
+    }, 1000);
 
     const handlePlay = () => {
         setPaused(!paused);
@@ -148,11 +145,14 @@ const Player: FC<PlayerProps> = ({ image, name, artist, duration}) => {
                         <Slider
                             aria-label="time-indicator"
                             size="small"
-                            value={Math.round(ref.current?.currentTime!)}
+                            value={position}
                             min={0}
                             step={1}
                             max={ref.current?.duration}
-                            onChange={(_, value) => setPosition(value as number)}
+                            onChange={(_, value) => {
+                                setOnChange(true)
+                                setPosition(value as number)
+                            }}
                             sx={{
                                 color: "white",
                                 height: 4,
@@ -189,8 +189,8 @@ const Player: FC<PlayerProps> = ({ image, name, artist, duration}) => {
                             mt: -1,
                         }}
                         >
-                            <TinyText>{formatDuration(Math.round(ref.current?.currentTime!))}</TinyText>
-                            <TinyText>-{formatDuration(Math.round(ref.current?.duration!) - Math.round(ref.current?.currentTime!))}</TinyText>
+                            <TinyText>{formatDuration(position)}</TinyText>
+                            <TinyText>-{formatDuration(Math.round(ref.current?.duration!) - position)}</TinyText>
                         </Box>
                 </Box>
             </Box>
